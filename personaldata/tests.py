@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from .models import AboutDesc, Variable
 from .serializers import VariableSerializer
-from pytest_django.asserts import assertTemplateUsed
 # Create your tests here.
 
 from rest_framework.authtoken.models import Token
@@ -12,12 +11,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 # Include an appropriate `Authorization:` header on all requests.
-
-
-
-def test_create(self):
-    response = self.client.get(reverse('create', args=[self.userName]))
-    self.assertEqual(response.status_code, 200)
 
 
 # # class to define a test case for login

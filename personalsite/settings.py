@@ -41,6 +41,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,8 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'ckeditor',
     'rest_framework',
-    'corsheaders',
-    'personaldata'
+    'personaldata',
 ]
 
 REST_FRAMEWORK = {
@@ -67,21 +67,27 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.TemplateHTMLRenderer'
     ]
 }
-# CORS_ALLOWED_ORIGINS = env.list('ALLOWED_HOSTS')
-
+# CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS')
+# CORS_ALLOWED_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080","https://deadania.com"
 ]
+from corsheaders.defaults import default_methods
+
+CORS_ALLOW_METHODS = list(default_methods) + [
+    "POKE",
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'personalsite.urls'
@@ -161,3 +167,4 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

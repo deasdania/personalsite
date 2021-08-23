@@ -1,22 +1,12 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
 # Create your views here.
 from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc
-# from .serializers import TaskSerializer
-
-from django.core import serializers
-from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework.permissions import IsAuthenticated
-#
-# class TaskViewSet(viewsets.ModelViewSet):
-#     authentication_classes = (BasicAuthentication,)
-#     permissions_classes = (IsAuthenticated,)
-#     queryset = Task.objects.all()
-#     serializer_class = TaskSerializer
+
 
 class HelloView(APIView):
     permission_classes = (IsAuthenticated,)             # <-- And here

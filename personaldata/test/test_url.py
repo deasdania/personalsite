@@ -17,10 +17,12 @@ def client():
 def test_path_get_variable(client):
     response = client.get(reverse('variable'))
     assert response.request['PATH_INFO'] == '/variable/'
+    # assert response.request['PATH_INFO'] == '12345'
 
 def test_path_get_course(client):
     response = client.get(reverse('course'))
     assert response.request['PATH_INFO'] == '/course/'
+    # assert response.request['PATH_INFO'] == '/cdernry/'
 
 def test_path_get_experience(client):
     response = client.get(reverse('experience'))
@@ -37,4 +39,3 @@ def test_path_get_social(client):
 def test_path_get_about(client):
     response = client.get(reverse('about'))
     assert response.request['PATH_INFO'] == '/about/'
-

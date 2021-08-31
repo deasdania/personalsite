@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from .models import AboutDesc, Variable
+from .views import  GetSocialMedia, GetEducation, GetExperience, GetCourse, GetVariables
 from .serializers import VariableSerializer
 # Create your tests here.
 
@@ -52,49 +53,33 @@ class GetPersonalDataTestCase(TestCase):
         self.assertNotEqual(about_count, 0)
         self.assertEqual(about_published_count, 1)
 
-    def test_get_variables(self):
+    def test_response_variables(self):
         # get API response
         response = self.client.get(reverse('variable'))
         # print(response.__dict__)
-        # get data from db
-        variables = Variable.objects.all()
-        variablelist = []
-
-        for variable in variables:
-            variabledict = {}
-            variabledict["id"] = variable.id
-            variabledict["name"] = variable.name
-            variabledict["value"] = variable.value
-            variablelist.append(variabledict)
-        self.assertEqual(response.data['variables'], variablelist)
+        self.assertEqual(response.data['variables'], GetVariables())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_path_get_variable(self):
-        # get API response
-        response = self.client.get(reverse('variable'))
-        self.assertEqual(response.request['PATH_INFO'], '/variable/')
-
-    def test_path_get_course(self):
+    def test_response_courses(self):
         # get API response
         response = self.client.get(reverse('course'))
-        self.assertEqual(response.request['PATH_INFO'], '/course/')
+        self.assertEqual(response.data['courses'], GetCourse())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_path_get_experience(self):
-        # get API response
-        response = self.client.get(reverse('experience'))
-        self.assertEqual(response.request['PATH_INFO'], '/experience/')
-
-    def test_path_get_education(self):
-        # get API response
-        response = self.client.get(reverse('education'))
-        self.assertEqual(response.request['PATH_INFO'], '/education/')
-
-    def test_path_get_social(self):
+    def test_response_sosmed(self):
         # get API response
         response = self.client.get(reverse('social'))
-        self.assertEqual(response.request['PATH_INFO'], '/social/')
+        self.assertEqual(response.data['sosial_media'], GetSocialMedia())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_path_get_about(self):
+    def test_response_education(self):
         # get API response
-        response = self.client.get(reverse('about'))
-        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        response = self.client.get(reverse('education'))
+        self.assertEqual(response.data['educations'], GetEducation())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_response_experience(self):
+        # get API response
+        response = self.client.get(reverse('experience'))
+        self.assertEqual(response.data['experiences'], GetExperience())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

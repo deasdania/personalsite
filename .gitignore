@@ -85,7 +85,8 @@ env.bak/
 venv.bak/ 
 
 # mkdocs documentation 
-/site 
+/site
+.github/workflows
 
 # mypy 
 .mypy_cache/ 

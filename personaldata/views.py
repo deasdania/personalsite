@@ -12,7 +12,7 @@ def index(APIView):
     return HttpResponseRedirect("/admin/")
 
 class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['message'] = 'Hello, World!'
@@ -24,7 +24,7 @@ class HelloView(APIView):
         return Response(content)
 
 class DataView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['message'] = 'Hello, World!'
@@ -36,42 +36,42 @@ class DataView(APIView):
         return Response(content)
 
 class GetContentAboutView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['content_about'] = GetAbout()
         return Response(content)
 
 class GetSocialMediaView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['sosial_media'] = GetSocialMedia()
         return Response(content)
 
 class GetEducationView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['educations'] = GetEducation()
         return Response(content)
 
 class GetExperienceView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['experiences'] = GetExperience()
         return Response(content)
 
 class GetCourseView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['courses'] = GetCourse()
         return Response(content)
 
 class GetVariableView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
+    # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):
         content = {}
         content['variables'] = GetVariables()

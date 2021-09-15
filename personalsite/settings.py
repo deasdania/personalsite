@@ -67,11 +67,11 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.TemplateHTMLRenderer'
     ]
 }
-# CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS')
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS')
 # CORS_ALLOWED_ALL = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080","https://deadania.com"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8080","https://deadania.com"
+# ]
 from corsheaders.defaults import default_methods
 
 CORS_ALLOW_METHODS = list(default_methods) + [

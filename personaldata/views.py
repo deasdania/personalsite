@@ -1,10 +1,11 @@
 # from django.shortcuts import render
 
 # Create your views here.
-from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc
+from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc, Project
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponseRedirect
 
@@ -77,6 +78,12 @@ class GetVariableView(APIView):
         content['variables'] = GetVariables()
         return Response(content)
 
+class GetProjectsView(APIView):
+    # permission_classes = (IsAuthenticated,)             # <-- And here
+    def get(self, request):
+        content = {}
+        content['projects'] = GetProjects()
+        return Response(content)
 
 def GetSocialMedia():
     sosmeds = SocialMedia.objects.filter(is_publish=True)
@@ -152,6 +159,22 @@ def GetVariables():
         variabledict["value"] = variable.value
         variablelist.append(variabledict)
     return variablelist
+
+def GetProjects():
+    projects = Project.objects.filter(is_publish=True)
+    projectlist = []
+    for project in projects:
+        projectdict = {}
+        projectdict["id"] = project.id
+        projectdict["name"] = project.name
+        projectdict["short_line"] = project.short_line
+        projectdict["description"] = project.description
+        projectdict["image_path"] = project.image_path
+        projectdict["repo_url"] = project.repo_url
+        projectdict["journal_url"] = project.journal_url
+        projectdict["stacks"] = [a.name for a in project.stacks.all()]
+        projectlist.append(projectdict)
+    return projectlist
 
 def GetAbout():
     about = AboutDesc.objects.get(is_publish=True)

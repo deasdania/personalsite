@@ -27,6 +27,7 @@ urlpatterns = [
 
     path('social/', views.GetSocialMediaView.as_view(), name='social'),
     path('education/', views.GetEducationView.as_view(), name='education'),
+    path('projects/', views.GetProjectsView.as_view(), name='projects'),
     path('experience/', views.GetExperienceView.as_view(), name='experience'),
     path('course/', views.GetCourseView.as_view(), name='course'),
     path('variable/', views.GetVariableView.as_view(), name='variable'),

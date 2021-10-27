@@ -85,3 +85,33 @@ class AboutDesc(CreateUpdate):
     purpose = models.CharField(max_length=255, null=True, blank=True)
     is_publish = models.BooleanField(default=False)
 
+class Stacks(CreateUpdate):
+    TYPE_CHOICES = [
+        ('LANGUAGE', 'Programming Language'),
+        ('FRAMEWORK', 'Framework'),
+        ('PLATFORM', 'Platform'),
+    ]
+    name = models.CharField(max_length=20)
+    stack_type = models.CharField(
+        max_length=20,
+        choices=TYPE_CHOICES,
+        default='LANGUAGE'
+        )
+    icon_class_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Project(CreateUpdate):
+    name = models.CharField(max_length=255)
+    image_path = models.CharField(max_length=255)
+    short_line = models.CharField(max_length=255)
+    description = RichTextField(blank=True,null=True)
+    repo_url = models.CharField(max_length=255)
+    journal_url = models.CharField(max_length=255, blank=True)
+    date = models.DateField(null=True, blank=True)
+    is_publish = models.BooleanField(default=False)
+    stacks = models.ManyToManyField(Stacks)
+    def __str__(self):
+        return self.name
+

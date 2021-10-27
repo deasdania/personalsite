@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc
+from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc, Project, Stacks
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -23,4 +23,11 @@ class JobdescAdmin(admin.ModelAdmin):
 @admin.register(AboutDesc)
 class AboutDescAdmin(admin.ModelAdmin):
     list_display = ('purpose', 'is_publish', 'update_date')
+@admin.register(Project)
+class ProjectsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_publish', 'description')
+@admin.register(Stacks)
+class StacksAdmin(admin.ModelAdmin):
+    list_display = ('name', 'icon_class_name')
+
 

@@ -136,17 +136,20 @@ def GetExperience():
     return experiencelist
 
 def GetCourse():
-    courses = Course.objects.filter(is_publish=True).order_by('end_date')
+    courses = Course.objects.filter(is_publish=True).order_by('-end_date')
     courselist = []
+    sort_number = 1
     for course in courses:
         coursedict = {}
         coursedict["id"] = course.id
+        coursedict["number"] = sort_number
         coursedict["course_name"] = course.course_name
         coursedict["start_date"] = course.start_date
         coursedict["end_date"] = course.end_date
         coursedict["promotor"] = course.promotor
         coursedict["certificate_id"] = course.certificate_id
         courselist.append(coursedict)
+        sort_number+=1
     return courselist
 
 def GetVariables():

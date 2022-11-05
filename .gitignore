@@ -117,3 +117,4 @@ GitHub.sublime-settings
 
 # ignore dbsqlite
 db.sqlite3
+personalsite/.env

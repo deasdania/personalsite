@@ -21,7 +21,8 @@ from personaldata import views
 
 # patterns
 urlpatterns = [
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
+    path('', views.PersonalDataView.as_view(), name='personaldata'),
     path('admin/', admin.site.urls),
     path('hello/', views.HelloView.as_view(), name='hello'),
     path('personaldata/', views.DataView.as_view(), name='data'),
@@ -33,4 +34,4 @@ urlpatterns = [
     path('course/', views.GetCourseView.as_view(), name='course'),
     path('variable/', views.GetVariableView.as_view(), name='variable'),
     path('about/', views.GetContentAboutView.as_view(), name='about'),
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

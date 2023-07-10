@@ -4,7 +4,8 @@
 from .models import SocialMedia, Variable, Experience, Course, Education, Jobdesc, AboutDesc, Project
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from rest_framework import viewsets, status
+from django.views.generic import TemplateView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponseRedirect
@@ -24,6 +25,18 @@ class HelloView(APIView):
         content['variable'] = GetVariables()
         return Response(content)
 
+class PersonalDataView(TemplateView):
+    template_name = 'index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message'] = 'Hello, World!'
+        context['sosial_media'] = GetSocialMedia()
+        context['educations'] = GetEducation()
+        context['experiences'] = GetExperience()
+        context['courses'] = GetCourse()
+        context['variable'] = GetVariables()
+        return context
+    
 class DataView(APIView):
     # permission_classes = (IsAuthenticated,)             # <-- And here
     def get(self, request):

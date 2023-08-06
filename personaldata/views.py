@@ -30,11 +30,13 @@ class PersonalDataView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['message'] = 'Hello, World!'
-        context['sosial_media'] = GetSocialMedia()
         context['educations'] = GetEducation()
         context['experiences'] = GetExperience()
         context['courses'] = GetCourse()
-        context['variable'] = GetVariables()
+        for v in GetSocialMedia():
+            context[v["media_name"]] = v["url"]
+        for v in GetVariables():
+            context[v["name"]] = v["value"]
         return context
     
 class DataView(APIView):
@@ -42,11 +44,13 @@ class DataView(APIView):
     def get(self, request):
         content = {}
         content['message'] = 'Hello, World!'
-        content['sosial_media'] = GetSocialMedia()
         content['educations'] = GetEducation()
         content['experiences'] = GetExperience()
         content['courses'] = GetCourse()
-        content['variable'] = GetVariables()
+        for v in GetSocialMedia():
+            content[v["media_name"]] = v["url"]
+        for v in GetVariables():
+            content[v["name"]] = v["value"]
         return Response(content)
 
 class GetContentAboutView(APIView):
